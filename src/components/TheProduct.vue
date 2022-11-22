@@ -1,12 +1,8 @@
 <template>
   <div
     class="relative w-60 bg-white shadow-md rounded-lg pb-4 cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
-    v-if="isToggle ? data.sale : true"
-    v-show="
-      itemSearch === ''
-        ? true
-        : data.title.toLowerCase().includes(itemSearch.toLowerCase())
-    "
+    v-if="isDiscounted"
+    v-show="findItem"
   >
     <img
       class="mx-auto w-48 h-48"
@@ -17,17 +13,17 @@
       <p>${{ data.price }}</p>
     </div>
     <p
-      v-if="sale"
+      v-if="data.sale"
       class="absolute top-0 right-0 translate-x-3 -translate-y-6 text-center py-4 font-bold text-green-500"
     >
       Sale
     </p>
     <p
       class="bg-gray-200 w-max mx-auto py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:bg-green-500 hover:text-white"
+      @click="addedToCart()"
     >
       Add to cart
     </p>
-    <div class="fixed top-0 right-0">{{items}}</div>
   </div>
 </template>
 
@@ -36,8 +32,25 @@ export default {
   props: { data: Object, sale: Boolean, isToggle: Boolean, itemSearch: String },
   data() {
     return {
-      items: ''
+      isDiscount: false,
+      selectedItemData: []
+    };
+  },
+  methods: {
+    addedToCart() {
+      this.selectedItemData.push(this.data)
+      this.$emit('addedToCart', this.selectedItemData)
     }
+  },
+  computed: {
+    isDiscounted: function () {
+      return this.isToggle ? this.data.sale : true;
+    },
+    findItem: function () {
+      return this.itemSearch === ""
+        ? true
+        : this.data.title.toLowerCase().includes(this.itemSearch.toLowerCase());
+    },
   },
 };
 </script>
