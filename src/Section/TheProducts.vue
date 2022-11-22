@@ -1,6 +1,6 @@
 <template>
   <div class="flex gap-4 flex-wrap mx-auto justify-center max-w-5xl py-14">
-    <TheProduct v-for="(product, index) in products" :data="product" :is-toggle="isToggle" :item-search="itemSearch" :key="index"/>
+    <TheProduct v-for="(product, index) in products" :data="product" :is-toggle="isToggle" :item-search="itemSearch" @addedToCart="addToCartFunc($event)" :key="index"/>
   </div>
 </template>
 
@@ -15,8 +15,12 @@ export default {
   data() {
     return {
       products: productsURL.products,
-      selectedItem: ''
     };
-  }
+  },
+  methods: {
+    addToCartFunc(e) {
+      this.$emit('addedToCart', e)
+    }
+  },
 };
 </script>
