@@ -8,7 +8,7 @@
         <!-- switch -->
         <div
           class="w-10 rounded-xl h-4 bg-gray-900 flex cursor-pointer transition-all duration-300 ease-in-out"
-          :style="{ paddingLeft: (isToggle ? '24px' : '0px'), backgroundColor: (isToggle ? 'green' : '#1F2937') }"
+          :style="{ paddingLeft: addPl, backgroundColor: addBg }"
           @click="toggle()"
         >
           <div class="h-4 w-4 border-black border-2 bg-white rounded-full scale-[1.1]"></div>
@@ -25,6 +25,14 @@
         methods: {
           toggle() {
             this.$emit('toggle', this.isToggle)
+          }
+        },
+        computed: {
+          addPl() {
+            return this.isToggle ? '24px' : '0px'
+          },
+          addBg(){
+            return this.isToggle ? 'green' : '#1F2937'
           }
         },
     }
