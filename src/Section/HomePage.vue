@@ -1,8 +1,8 @@
 <template>
   <div>
-    <NavBar :item-search="itemSearch" @searchData="search($event)"/>
+    <NavBar :item-search="itemSearch" @searchData="search($event)" :selected-item="uData" />
     <ProductsToggle :is-toggle="isToggle" @toggle="isToggle = !isToggle" />
-    <TheProducts :is-toggle="isToggle" :item-search="itemSearch"/>
+    <TheProducts :is-toggle="isToggle" :item-search="itemSearch" @addedToCart="addToCartFunc"/>
   </div>
 </template>
 
@@ -20,13 +20,16 @@ export default {
     return {
       isToggle: false,
       itemSearch: "",
-      uData: ""
+      uData: "",
     };
   },
   methods: {
     search(e) {
       this.itemSearch = e;
     },
+    addToCartFunc(e){
+      this.uData = e
+    }
   },
 };
 </script>
