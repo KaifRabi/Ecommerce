@@ -1,6 +1,8 @@
 <template>
   <header>
-    <nav class="flex justify-between px-8 py-4 shadow-md bg-white w-full fixed z-10 top-0">
+    <nav
+      class="flex justify-between px-8 py-4 shadow-md bg-white w-full fixed z-10 top-0"
+    >
       <!-- logo -->
       <h3 class="text-3xl font-bold">
         E-<span class="text-red-500">Commerce</span>
@@ -39,8 +41,36 @@
       </form>
       <!-- cart -->
       <div class="flex">
-        <img src="../assets/logos/cart.svg" alt="cart" />
-        <div class="bg-red-600 p-1 px-3 text-white font-bold rounded-full my-auto">3</div>
+        <img
+          src="../assets/logos/cart.svg"
+          alt="cart"
+          @click="cartToggle = !cartToggle"
+          class="cursor-pointer"
+        />
+        <div
+          v-if="arr.length > 0"
+          class="bg-red-600 p-1 px-3 text-white font-bold rounded-full my-auto"
+        >
+          {{ arr.length }}
+        </div>
+      </div>
+      <div
+        v-if="cartToggle"
+        class="absolute right-4 top-20 w-64 h-64 bg-slate-300 text-center"
+      >
+        <h1 class="">Total Items</h1>
+        <div class="">{{ items }}</div>
+        <h1 class="">Total Price</h1>
+        <div class="">{{ totalPrice.reduce((a, b) => a + b, 0) }}</div>
+        <a
+          class="bg-red-500 cursor-pointer text-white"
+          @click="
+            arr = [];
+            items = [];
+            totalPrice = [];
+          "
+          >Reset</a
+        >
       </div>
     </nav>
   </header>
@@ -49,15 +79,28 @@
 <script>
 export default {
   name: "NavBar",
+  props: ["selectedItem"],
   data() {
     return {
-      search: this.itemSearch
-    }
+      search: this.itemSearch,
+      itemsSelected: 0,
+      arr: [],
+      totalPrice: [],
+      items: [],
+      cartToggle: false,
+    };
   },
   methods: {
     sendSearchData() {
-      this.$emit('searchData', this.search)
-    }
+      this.$emit("searchData", this.search);
+    },
+  },
+  watch: {
+    selectedItem(newValue) {
+      this.arr.push(newValue[0]);
+      this.totalPrice.push(newValue[0].price);
+      this.items.push(newValue[0].title);
+    },
   },
 };
 </script>
