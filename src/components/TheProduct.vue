@@ -29,27 +29,26 @@
 
 <script>
 export default {
-  props: { data: Object, sale: Boolean, isToggle: Boolean, itemSearch: String },
+  props: { data: Object, sale: Boolean,},
   data() {
     return {
       isDiscount: false,
-      selectedItemData: []
     };
   },
   methods: {
     addedToCart() {
-      this.selectedItemData.push(this.data)
-      this.$emit('addedToCart', this.selectedItemData)
-    }
+      this.$store.commit("addToCart", this.data);
+
+    },
   },
   computed: {
     isDiscounted: function () {
-      return this.isToggle ? this.data.sale : true;
+      return this.$store.state.isDiscount ? this.data.sale : true;
     },
     findItem: function () {
-      return this.itemSearch === ""
+      return this.$store.state.itemSearched === ""
         ? true
-        : this.data.title.toLowerCase().includes(this.itemSearch.toLowerCase());
+        : this.data.title.toLowerCase().includes(this.$store.state.itemSearched.toLowerCase());
     },
   },
 };

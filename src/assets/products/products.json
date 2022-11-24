@@ -1,52 +1,60 @@
 {
   "products": [
     {
+      "id": 1,
       "path": "shirt.png",
       "title": "Shirt",
       "price": 10,
       "sale": true
     },
     {
+      "id": 2,
       "path": "pant.png",
       "title": "Pant",
       "price": 13,
       "sale": true
     },
     {
+      "id": 3,
       "path": "powerbank.png",
       "title": "Powerbank",
       "price": 883,
       "sale": false
     },
     {
+      "id": 4,
       "path": "iphone.png",
       "title": "Iphone",
       "price": 999,
       "sale": false
     },
     {
+      "id": 5,
       "path": "macbook.png",
       "title": "Macbook",
       "price": 3999,
       "sale": false
     },
     {
+      "id": 6,
       "path": "airpods.png",
       "title": "Airpods",
       "price": 199,
       "sale": true
     },
     {
+      "id": 7,
       "path": "book.png",
       "title": "Book",
       "price": 99,
       "sale": false
     },
     {
-        "path": "watch.png",
-        "title": "Watch",
-        "price": 99,
-        "sale": true
-      }
+      "id": 8,
+      "path": "watch.png",
+      "title": "Watch",
+      "price": 99,
+      "sale": true
+    }
   ]
 }

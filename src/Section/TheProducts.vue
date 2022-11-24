@@ -1,26 +1,20 @@
 <template>
   <div class="flex gap-4 flex-wrap mx-auto justify-center max-w-5xl py-14">
-    <TheProduct v-for="(product, index) in products" :data="product" :is-toggle="isToggle" :item-search="itemSearch" @addedToCart="addToCartFunc($event)" :key="index"/>
+    <TheProduct v-for="product in products" :data="product" :key="product.id"/>
   </div>
 </template>
 
 <script>
-import productsURL from "@/assets/products/products.json";
+import items from "@/assets/products/products.json";
 import TheProduct from "@/components/TheProduct.vue";
 export default {
-    props: ['isToggle', 'itemSearch'],
   components: {
     TheProduct,
   },
   data() {
     return {
-      products: productsURL.products,
+      products: items.products,
     };
-  },
-  methods: {
-    addToCartFunc(e) {
-      this.$emit('addedToCart', e)
-    }
   },
 };
 </script>
